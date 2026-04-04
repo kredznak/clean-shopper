@@ -5,7 +5,7 @@
 
 ## Design Direction
 
-Clean Shopper should feel like a calm, trusted space — organic and minimal, with the restrained confidence of Apple's visual language. It's a place where information is presented cleanly and the interface gets out of the way, with occasional pops of editorial color (inspired by Monocle's confident use of accent) that add personality without clutter.
+Clean Shopper should feel like a trusted wellness brand — generous, approachable, and credible without being clinical. The reference points are Thrive Market and Grove Collaborative: clean layouts with an organic sensibility, confident use of color that feels natural rather than decorative, and a tone that informs rather than sells.
 
 The experience is closer to consulting a knowledgeable friend than browsing a store. There is no urgency, no pressure, no conversion tactics. Information appears when you need it — enough to be informed, never overwhelmed. The visual environment should feel like walking in nature: soft light, earthy tones, soothing and calming.
 
@@ -36,7 +36,7 @@ The palette is drawn from nature — forest greens, warm stones, soft earth. Col
 | color-primary | Sage | #6B8F71 | Primary actions, links, active states. A muted forest green — natural and trustworthy. |
 | color-primary-light | Soft Sage | #8FB396 | Hover states, selected backgrounds, subtle highlights. |
 | color-primary-dark | Deep Forest | #4A6B50 | Pressed states, high-emphasis text on light backgrounds. |
-| color-accent | Terracotta | #C4704B | Editorial pops — badges, highlights, featured content. Used sparingly for personality. |
+| color-accent | Soft Teal | #4AADA8 | Accents, interactive highlights, featured content. A calm blue-green that complements the primary green without competing. |
 
 ### Semantic Colors
 
@@ -68,7 +68,7 @@ The palette is drawn from nature — forest greens, warm stones, soft earth. Col
 |---------|-----|-------|
 | Page background | #F7F5F2 (neutral-50) | Main canvas. Warm stone-white. |
 | Card / elevated | #FFFFFF | Product cards, chat bubbles (AI), comparison panels. Lifts above the page. |
-| Sidebar / secondary | #EFECE7 (neutral-100) | Preferences panel, cart sidebar, secondary surfaces. |
+| Sidebar / secondary | #EDE3CB (warm sand) | Preferences panel, cart sidebar, secondary surfaces. Distinct from the stone-white page background — adds warmth. |
 | Overlay backdrop | rgba(30, 27, 23, 0.4) | Modal and drawer backdrops. Warm black at low opacity. |
 
 ### Accessibility
@@ -94,9 +94,10 @@ Text should feel warm and readable — like a well-edited magazine, not a techni
 
 | Role | Font | Fallback | Rationale |
 |------|------|----------|-----------|
-| Primary | Source Serif 4 | Georgia, 'Times New Roman', serif | A humanist serif with excellent readability. Warm and editorial — bridges the Apple-like restraint with Monocle's editorial confidence. Variable font with optical sizing. |
-| Secondary | Inter | system-ui, -apple-system, sans-serif | Clean sans-serif for UI elements, labels, metadata. Provides contrast with the serif body without competing. |
+| Primary | Poppins | system-ui, -apple-system, sans-serif | A geometric sans-serif that reads as modern and friendly — accessible and confident without feeling clinical. Sufficient weight range (300–700) to cover the full type scale without a second typeface. |
 | Monospace | JetBrains Mono | ui-monospace, 'Cascadia Code', monospace | Ingredient lists, EWG scores, data-heavy comparisons. Clear at small sizes. |
+
+Poppins handles all type roles — display, headings, body, labels, and metadata. No secondary typeface is needed.
 
 ### Type Scale
 
@@ -104,14 +105,14 @@ Scale ratio: 1.25 (major third)
 
 | Token | Size | Weight | Line Height | Usage |
 |-------|------|--------|-------------|-------|
-| display | 2.441rem (39px) | 300 | 1.15 | Hero moments, landing headline. Light weight for elegance. |
-| h1 | 1.953rem (31px) | 400 | 1.2 | Page titles. |
-| h2 | 1.563rem (25px) | 600 | 1.25 | Section headings. |
-| h3 | 1.25rem (20px) | 600 | 1.3 | Card titles, subsection heads. |
-| h4 | 1rem (16px) | 600 | 1.35 | Label headings, sidebar titles. Set in Inter (secondary). |
-| body | 1rem (16px) | 400 | 1.7 | Paragraphs, chat messages, descriptions. Generous line-height for readability. |
-| small | 0.875rem (14px) | 400 | 1.5 | Captions, metadata, helper text. Set in Inter. |
-| caption | 0.75rem (12px) | 500 | 1.4 | Badges, tags, timestamps. Set in Inter. |
+| display | 2.441rem (39px) | 300 | 1.15 | Hero moments, landing headline. Light weight for elegance. Poppins. |
+| h1 | 1.953rem (31px) | 400 | 1.2 | Page titles. Poppins. |
+| h2 | 1.563rem (25px) | 600 | 1.25 | Section headings. Poppins. |
+| h3 | 1.25rem (20px) | 600 | 1.3 | Card titles, subsection heads. Poppins. |
+| h4 | 1rem (16px) | 600 | 1.35 | Label headings, sidebar titles. Poppins. |
+| body | 1rem (16px) | 400 | 1.7 | Paragraphs, chat messages, descriptions. Generous line-height for readability. Poppins. |
+| small | 0.875rem (14px) | 400 | 1.5 | Captions, metadata, helper text. Poppins. |
+| caption | 0.75rem (12px) | 500 | 1.4 | Badges, tags, timestamps. Poppins. |
 
 ### Letter Spacing
 
@@ -233,7 +234,7 @@ Not included in V1. The warm, earthy light-mode palette is the primary experienc
   --color-primary: #6B8F71;
   --color-primary-light: #8FB396;
   --color-primary-dark: #4A6B50;
-  --color-accent: #C4704B;
+  --color-accent: #4AADA8;
 
   /* --- Colors: Semantic --- */
   --color-success: #6B8F71;
@@ -256,12 +257,11 @@ Not included in V1. The warm, earthy light-mode palette is the primary experienc
   /* --- Colors: Surfaces --- */
   --surface-page: #F7F5F2;
   --surface-card: #FFFFFF;
-  --surface-secondary: #EFECE7;
+  --surface-secondary: #EDE3CB;
   --surface-overlay: rgba(30, 27, 23, 0.4);
 
   /* --- Typography --- */
-  --font-primary: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --font-secondary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-primary: 'Poppins', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
 
   --text-display: 2.441rem;
@@ -336,9 +336,9 @@ Not included in V1. The warm, earthy light-mode palette is the primary experienc
 
 ## Open Decisions
 
-1. **Serif for body text.** Source Serif 4 was chosen for warmth and editorial character. [Assumed — confirm or override.] If the conversational interface feels too formal with serif body text, Inter (the secondary font) could take over body copy, with Source Serif reserved for headings only.
+1. **Poppins across all type roles.** Confirmed. Single typeface simplifies implementation and keeps the system lightweight. If additional contrast is needed between headings and body at a later stage, a secondary serif could be revisited — but start with Poppins only.
 
-2. **Accent color frequency.** Terracotta (#C4704B) is positioned for editorial pops — but "how often" and "where exactly" needs real screens to test. Too much and it fights the calm; too little and the Monocle inspiration is lost.
+2. **Accent color frequency.** Soft teal (#4AADA8) is positioned for interactive highlights and accents — but how often and where needs real screens to test. Too much and it competes with the primary green; too little and the warmth of the sand surface carries all the work.
 
 3. **Content max-width at 720px.** Optimized for conversational readability. Comparison views may need the wider 1080px container — the trigger for switching needs definition.
 
