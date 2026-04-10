@@ -33,3 +33,11 @@ See /docs/component-spec.md for defined components. Use existing components befo
 
 ## Build Plan
 See /docs/build-plan.md for the current phase breakdown. We are building phase by phase — do not jump ahead.
+
+## Design System
+
+This project has a defined design system. Reference these files when building any UI:
+- **Visual artifact:** `docs/design-system.html` — open in a browser to preview colors, typography, spacing, and shape
+- **Documentation & tokens:** `docs/design-system.md` — full design rationale, all token values, and CSS custom properties
+
+Always use the design tokens defined in the design system when writing styles. Do not hard-code colors, font sizes, spacing, or border-radius values — use the corresponding CSS custom property from the token system.

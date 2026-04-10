@@ -1,0 +1,137 @@
+export const tokens = {
+  colors: {
+    primary: {
+      DEFAULT: '#6B8F71',
+      light: '#8FB396',
+      dark: '#4A6B50',
+    },
+    accent: '#4AADA8',
+    semantic: {
+      success: '#6B8F71',
+      warning: '#C4944A',
+      error: '#B85C5C',
+      info: '#7B8FA1',
+    },
+    neutral: {
+      50: '#F7F5F2',
+      100: '#EFECE7',
+      200: '#E2DDD5',
+      300: '#CFC8BD',
+      400: '#A89F93',
+      500: '#857C71',
+      600: '#655D53',
+      700: '#4A443C',
+      800: '#332E28',
+      900: '#1E1B17',
+    },
+    surface: {
+      page: '#F7F5F2',
+      card: '#FFFFFF',
+      secondary: '#EDE3CB',
+      overlay: 'rgba(30, 27, 23, 0.4)',
+    },
+  },
+
+  typography: {
+    fontFamily: {
+      primary: "'Poppins', system-ui, -apple-system, sans-serif",
+      mono: "'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace",
+    },
+    fontSize: {
+      display: '2.441rem',
+      h1: '1.953rem',
+      h2: '1.563rem',
+      h3: '1.25rem',
+      h4: '1rem',
+      body: '1rem',
+      small: '0.875rem',
+      caption: '0.75rem',
+    },
+    fontWeight: {
+      light: 300,
+      regular: 400,
+      medium: 500,
+      semibold: 600,
+    },
+    lineHeight: {
+      display: 1.15,
+      heading: 1.2,
+      subheading: 1.3,
+      body: 1.7,
+      small: 1.5,
+      caption: 1.4,
+    },
+    letterSpacing: {
+      display: '-0.02em',
+      heading: '-0.01em',
+      caps: '0.08em',
+    },
+  },
+
+  spacing: {
+    1: '4px',
+    2: '8px',
+    3: '12px',
+    4: '16px',
+    6: '24px',
+    8: '32px',
+    10: '40px',
+    12: '48px',
+    16: '64px',
+  },
+
+  layout: {
+    maxWidth: {
+      content: '720px',
+      wide: '1080px',
+    },
+    pageMargin: {
+      desktop: '32px',
+      mobile: '16px',
+    },
+  },
+
+  shape: {
+    borderRadius: {
+      sm: '6px',
+      md: '10px',
+      lg: '14px',
+      xl: '20px',
+      full: '9999px',
+    },
+    border: {
+      default: '1px solid #E2DDD5',
+      subtle: '1px solid #EFECE7',
+      focusRing: '2px solid #6B8F71',
+      focusOffset: '2px',
+    },
+  },
+
+  shadows: {
+    sm: '0 1px 3px rgba(30,27,23,0.06), 0 1px 2px rgba(30,27,23,0.04)',
+    md: '0 4px 12px rgba(30,27,23,0.08), 0 2px 4px rgba(30,27,23,0.04)',
+    lg: '0 12px 28px rgba(30,27,23,0.12), 0 4px 8px rgba(30,27,23,0.06)',
+  },
+
+  motion: {
+    duration: {
+      fast: '120ms',
+      normal: '220ms',
+      slow: '380ms',
+    },
+    easing: {
+      default: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+      in: 'cubic-bezier(0.42, 0, 1, 1)',
+      out: 'cubic-bezier(0, 0, 0.58, 1)',
+    },
+  },
+
+  breakpoints: {
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+  },
+}
+
+export default tokens
