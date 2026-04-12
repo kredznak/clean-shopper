@@ -73,20 +73,21 @@ export default function BrowsePage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {PRODUCTS.map((product) => (
-          <div key={product.id} className="flex flex-col gap-3">
-            <ProductCard
-              name={product.name}
-              safetyScore={product.safetyScore}
-              category={product.category}
-              description={product.description}
-            />
-            <Button
-              label={saved[product.id] ? 'Saved to List' : 'Save to List'}
-              variant={saved[product.id] ? 'primary' : 'secondary'}
-              size="sm"
-              onClick={() => toggleSave(product.id)}
-            />
-          </div>
+          <ProductCard
+            key={product.id}
+            name={product.name}
+            safetyScore={product.safetyScore}
+            category={product.category}
+            description={product.description}
+            action={
+              <Button
+                label={saved[product.id] ? 'Saved to List' : 'Save to List'}
+                variant={saved[product.id] ? 'primary' : 'secondary'}
+                size="sm"
+                onClick={() => toggleSave(product.id)}
+              />
+            }
+          />
         ))}
       </div>
     </main>

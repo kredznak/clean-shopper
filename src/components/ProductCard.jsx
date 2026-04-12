@@ -1,6 +1,6 @@
 import SafetyBadge from './SafetyBadge'
 
-export default function ProductCard({ name, safetyScore, score, category, description, onClick }) {
+export default function ProductCard({ name, safetyScore, score, category, description, onClick, action }) {
   return (
     <article
       onClick={onClick}
@@ -43,6 +43,12 @@ export default function ProductCard({ name, safetyScore, score, category, descri
       <p className="text-body font-regular text-neutral-600 leading-body mt-1 line-clamp-2">
         {description}
       </p>
+
+      {action && (
+        <div className="mt-2 pt-4 border-t border-neutral-100">
+          {action}
+        </div>
+      )}
     </article>
   )
 }

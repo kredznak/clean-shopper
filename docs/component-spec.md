@@ -18,6 +18,7 @@ All visual values reference Tailwind theme tokens defined in `tailwind.config.js
 | `category` | `string` | Yes | Product category label |
 | `description` | `string` | Yes | Short product description (1–2 sentences) |
 | `onClick` | `() => void` | No | Handler for card selection |
+| `action` | `ReactNode` | No | Optional element rendered at the bottom of the card, separated by a divider (e.g. a Save button) |
 
 ### Visual Structure
 
