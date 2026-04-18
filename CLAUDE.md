@@ -3,7 +3,7 @@
 ## Project
 Clean Shopper is a personal product research assistant for ingredient-aware consumers. Users search for home and personal care products, get AI-generated clean/not-clean assessments based on ingredient safety data, save products to a personal library organized by category, and build shopping lists.
 
-Single-user app. No authentication in V1. Local state plus Supabase for data persistence.
+App uses Supabase Auth for user authentication (email + password). Local state plus Supabase for data persistence.
 
 ## Tech Stack
 - React (Vite) — frontend UI
@@ -23,12 +23,22 @@ Single-user app. No authentication in V1. Local state plus Supabase for data per
 - State: React useState and useContext only. No Redux, no Zustand.
 - File naming: kebab-case for all non-component files
 
+## Folder Structure
+- `src/components/` — shared components that are reused across multiple screens. If a component is only used in one screen, it does not belong here.
+- `src/features/<screen>/` — files specific to one screen (components, hooks, helpers). Keep screen-specific code inside the feature folder, not in src/components/.
+- Do not mix the two: shared goes in components/, screen-specific goes in features/.
+
 ## Do Not
-- Do not add user authentication or account features — V1 is single-user only
 - Do not use CSS other than Tailwind
 - Do not add features outside the current build phase without asking first
 - Do not create new components when an existing component in the component library covers the use case
 - Do not use any AI model other than claude-sonnet-4-20250514
+
+## Features
+- **Sign In** (`src/features/auth/SignInPage.jsx`) — email + password sign-in via `supabase.auth.signInWithPassword`. Links to Sign Up. Auth state is managed in `App.tsx` via `onAuthStateChange`.
+- **Sign Up** (`src/features/auth/SignUpPage.jsx`) — email + password account creation via `supabase.auth.signUp`. Shows a confirmation email prompt on success. Links to Sign In.
+- **Browse** (`src/features/browse/BrowsePage.jsx`) — displays all products from the Supabase `products` table in a responsive grid. Each card has a Save to List toggle.
+- **Search** (`src/features/search/SearchPage.jsx`) — lets users find products by typing a name, brand, or keyword. Queries Supabase using case-insensitive partial matching across `name`, `brand`, and `description`. Shows a result count, a no-results empty state, and the same product card grid as Browse.
 
 ## Component Library
 See /docs/component-spec.md for defined components. Use existing components before creating new ones.
