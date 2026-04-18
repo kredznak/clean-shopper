@@ -177,6 +177,7 @@ div.flex.items-center.gap-3.bg-surface-card.border.border-neutral-200.rounded-md
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 | `activeRoute` | `string` | Yes | Current route key for active link styling |
+| `onSignOut` | `() => void` | No | When provided, renders a "Sign out" button in the nav. Omit when the user is not signed in. |
 
 ### Visual Structure
 

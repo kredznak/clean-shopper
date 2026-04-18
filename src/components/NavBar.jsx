@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { key: 'preferences', label: 'Preferences' },
 ]
 
-export default function NavBar({ activeRoute }) {
+export default function NavBar({ activeRoute, onSignOut }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -40,6 +40,14 @@ export default function NavBar({ activeRoute }) {
               </a>
             )
           })}
+          {onSignOut && (
+            <button
+              onClick={onSignOut}
+              className="text-small font-medium text-neutral-500 hover:text-neutral-800 transition-colors duration-fast ease-default"
+            >
+              Sign out
+            </button>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -50,12 +58,10 @@ export default function NavBar({ activeRoute }) {
           aria-expanded={menuOpen}
         >
           {menuOpen ? (
-            // Close icon
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           ) : (
-            // Hamburger icon
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
@@ -83,6 +89,14 @@ export default function NavBar({ activeRoute }) {
               </a>
             )
           })}
+          {onSignOut && (
+            <button
+              onClick={() => { setMenuOpen(false); onSignOut() }}
+              className="text-small font-medium text-neutral-500 hover:text-neutral-800 transition-colors duration-fast ease-default text-left"
+            >
+              Sign out
+            </button>
+          )}
         </div>
       )}
     </header>

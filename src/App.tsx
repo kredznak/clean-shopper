@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface-page">
-      <NavBar activeRoute="home" />
+      <NavBar activeRoute="home" onSignOut={() => supabase.auth.signOut()} />
 
       <div className="bg-surface-card border-b border-neutral-200">
         <div className="max-w-wide mx-auto px-8">
