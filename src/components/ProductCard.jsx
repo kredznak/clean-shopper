@@ -5,7 +5,7 @@ export default function ProductCard({ name, safetyScore, score, category, descri
     <article
       onClick={onClick}
       className={`
-        bg-surface-card
+        bg-white
         rounded-lg shadow-sm border border-neutral-200
         overflow-hidden
         flex flex-col
@@ -19,12 +19,12 @@ export default function ProductCard({ name, safetyScore, score, category, descri
       onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
     >
       {/* Product image */}
-      <div className="w-full aspect-[3/2] bg-neutral-100 shrink-0">
+      <div className="w-full h-48 bg-white shrink-0 pt-3">
         {imageUrl ? (
           <img
             src={imageUrl}
             alt={name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain block"
           />
         ) : null}
       </div>
