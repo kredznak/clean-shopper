@@ -3,14 +3,17 @@ import { supabase } from '../../lib/supabase'
 import ProductCard from '../../components/ProductCard'
 import Button from '../../components/Button'
 import SearchBar from '../../components/SearchBar'
+import CategoryTag from '../../components/CategoryTag'
 
-export default function BrowsePage({ searchMode = false }) {
+const CATEGORIES = ['Personal Care', 'Home Cleaning', 'Baby Care', 'Kitchen']
+
+export default function BrowsePage({ searchMode = false, savedProducts = {}, onToggleSave }) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [saved, setSaved] = useState({})
   const [query, setQuery] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+  const [activeCategory, setActiveCategory] = useState(null)
 
   useEffect(() => {
     async function fetchProducts() {
@@ -37,24 +40,21 @@ export default function BrowsePage({ searchMode = false }) {
     }
   }, [searchMode])
 
-  function toggleSave(id) {
-    setSaved((prev) => ({ ...prev, [id]: !prev[id] }))
-  }
-
   function handleSearch() {
     setSearchQuery(query.trim())
   }
 
-  const filteredProducts = searchQuery
-    ? products.filter((p) => {
-        const q = searchQuery.toLowerCase()
-        return (
-          p.name?.toLowerCase().includes(q) ||
-          p.brand?.toLowerCase().includes(q) ||
-          p.description?.toLowerCase().includes(q)
-        )
-      })
-    : products
+  const filteredProducts = products.filter((p) => {
+    const matchesSearch = searchQuery
+      ? (p.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         p.brand?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         p.description?.toLowerCase().includes(searchQuery.toLowerCase()))
+      : true
+    const matchesCategory = activeCategory
+      ? p.category?.toLowerCase() === activeCategory.toLowerCase()
+      : true
+    return matchesSearch && matchesCategory
+  })
 
   return (
     <main className="max-w-wide mx-auto px-25 py-12">
@@ -74,13 +74,29 @@ export default function BrowsePage({ searchMode = false }) {
         </div>
       )}
 
-      <div className="flex flex-col gap-2 mb-10">
+      <div className="flex flex-col gap-2 mb-6">
         <h1 className="text-h1 font-regular text-neutral-800 leading-heading tracking-heading">
           Browse Products
         </h1>
         <p className="text-body font-regular text-neutral-500 leading-body">
           Explore products by category and save the ones you want to research further.
         </p>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-10">
+        <CategoryTag
+          label="All"
+          selected={activeCategory === null}
+          onClick={() => setActiveCategory(null)}
+        />
+        {CATEGORIES.map((cat) => (
+          <CategoryTag
+            key={cat}
+            label={cat}
+            selected={activeCategory === cat}
+            onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+          />
+        ))}
       </div>
 
       {loading && (
@@ -106,10 +122,10 @@ export default function BrowsePage({ searchMode = false }) {
               description={product.description}
               action={
                 <Button
-                  label={saved[product.id] ? 'Saved to List' : 'Save to List'}
-                  variant={saved[product.id] ? 'primary' : 'secondary'}
+                  label={savedProducts[product.id] ? 'Saved to List' : 'Save to List'}
+                  variant={savedProducts[product.id] ? 'primary' : 'secondary'}
                   size="sm"
-                  onClick={() => toggleSave(product.id)}
+                  onClick={() => onToggleSave(product)}
                 />
               }
             />

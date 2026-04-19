@@ -3,7 +3,7 @@ import { useState } from 'react'
 const NAV_LINKS = [
   { key: 'browse', label: 'Browse' },
   { key: 'search', label: 'Search' },
-  { key: 'cart', label: 'Cart' },
+  { key: 'my-list', label: 'My List' },
 ]
 
 export default function NavBar({ activeRoute, onNavigate, onSignOut }) {

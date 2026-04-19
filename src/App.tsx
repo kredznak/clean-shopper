@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import NavBar from './components/NavBar'
 import BrowsePage from './features/browse/BrowsePage'
+import MyListPage from './features/my-list/MyListPage'
 import SignInPage from './features/auth/SignInPage'
 import SignUpPage from './features/auth/SignUpPage'
 
@@ -12,6 +13,18 @@ export default function App() {
   const [loadingSession, setLoadingSession] = useState(true)
   const [authView, setAuthView] = useState<AuthView>('signin')
   const [activeTab, setActiveTab] = useState('browse')
+  const [savedProducts, setSavedProducts] = useState<Record<number, any>>({})
+
+  function toggleSave(product: any) {
+    setSavedProducts((prev) => {
+      if (prev[product.id]) {
+        const next = { ...prev }
+        delete next[product.id]
+        return next
+      }
+      return { ...prev, [product.id]: product }
+    })
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -48,7 +61,18 @@ export default function App() {
         onSignOut={() => supabase.auth.signOut()}
       />
 
-      <BrowsePage searchMode={activeTab === 'search'} />
+      {activeTab === 'my-list'
+        ? <MyListPage
+            savedProducts={savedProducts}
+            onToggleSave={toggleSave}
+            onNavigateToBrowse={() => setActiveTab('browse')}
+          />
+        : <BrowsePage
+            searchMode={activeTab === 'search'}
+            savedProducts={savedProducts}
+            onToggleSave={toggleSave}
+          />
+      }
     </div>
   )
 }
