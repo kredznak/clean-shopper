@@ -31,6 +31,7 @@ export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBr
               safetyScore={product.safety_score}
               category={product.category}
               description={product.description}
+              imageUrl={product.image_url}
               action={
                 <Button
                   label="Remove from List"

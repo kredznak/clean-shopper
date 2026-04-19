@@ -120,6 +120,7 @@ export default function BrowsePage({ searchMode = false, savedProducts = {}, onT
               safetyScore={product.safety_score}
               category={product.category}
               description={product.description}
+              imageUrl={product.image_url}
               action={
                 <Button
                   label={savedProducts[product.id] ? 'Saved to List' : 'Save to List'}
