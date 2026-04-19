@@ -3,6 +3,7 @@ import { supabase } from './lib/supabase'
 import NavBar from './components/NavBar'
 import BrowsePage from './features/browse/BrowsePage'
 import MyListPage from './features/my-list/MyListPage'
+import FloatingChat from './features/chat/FloatingChat'
 import SignInPage from './features/auth/SignInPage'
 import SignUpPage from './features/auth/SignUpPage'
 
@@ -61,18 +62,22 @@ export default function App() {
         onSignOut={() => supabase.auth.signOut()}
       />
 
-      {activeTab === 'my-list'
-        ? <MyListPage
-            savedProducts={savedProducts}
-            onToggleSave={toggleSave}
-            onNavigateToBrowse={() => setActiveTab('browse')}
-          />
-        : <BrowsePage
-            searchMode={activeTab === 'search'}
-            savedProducts={savedProducts}
-            onToggleSave={toggleSave}
-          />
-      }
+      {activeTab === 'my-list' && (
+        <MyListPage
+          savedProducts={savedProducts}
+          onToggleSave={toggleSave}
+          onNavigateToBrowse={() => setActiveTab('browse')}
+        />
+      )}
+      {(activeTab === 'browse' || activeTab === 'search') && (
+        <BrowsePage
+          searchMode={activeTab === 'search'}
+          savedProducts={savedProducts}
+          onToggleSave={toggleSave}
+        />
+      )}
+
+      <FloatingChat />
     </div>
   )
 }

@@ -369,3 +369,39 @@ EmptyState is display-only. It has no interactive states beyond the optional But
 - `body` should suggest the next step the user can take.
 - The optional `action` CTA should be the single most useful next action (e.g. "Search for a product").
 - **Do not** use EmptyState for error conditions — use an error message with `text-error` and a retry action instead.
+
+---
+
+## ChatBubble
+
+**Purpose:** Renders a single message in the AI chat interface. Visually distinguishes user messages (right-aligned, tinted) from AI responses (left-aligned, card surface).
+
+### Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `role` | `'user' \| 'assistant'` | Yes | Determines alignment and visual style |
+| `content` | `string` | Yes | The message text |
+
+### Visual Structure
+
+```
+— User message:
+  div.flex.justify-end
+    div.max-w-[80%].rounded-lg.px-4.py-3.bg-primary/10.text-neutral-800.text-body.font-regular.leading-body
+
+— AI message:
+  div.flex.justify-start
+    div.max-w-[80%].rounded-lg.px-4.py-3.bg-surface-card.border.border-neutral-200.shadow-sm.text-neutral-800.text-body.font-regular.leading-body
+```
+
+### States
+
+ChatBubble is display-only and has no interactive states.
+
+### Usage Rules
+
+- **Use** only inside the chat message thread in ChatPage.
+- **Do not** use ChatBubble for system notifications or toasts — use inline error text instead.
+- Content is rendered as plain text. SafetyBadge components may be composed alongside ChatBubble output when the AI response references a specific product.
+- Do not truncate content — chat messages should always be fully visible.
