@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import ProductCard from '../../components/ProductCard'
 import Button from '../../components/Button'
+import SearchBar from '../../components/SearchBar'
 
-export default function BrowsePage() {
+export default function BrowsePage({ searchMode = false }) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [saved, setSaved] = useState({})
+  const [query, setQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     async function fetchProducts() {
@@ -27,12 +30,50 @@ export default function BrowsePage() {
     fetchProducts()
   }, [])
 
+  useEffect(() => {
+    if (!searchMode) {
+      setQuery('')
+      setSearchQuery('')
+    }
+  }, [searchMode])
+
   function toggleSave(id) {
     setSaved((prev) => ({ ...prev, [id]: !prev[id] }))
   }
 
+  function handleSearch() {
+    setSearchQuery(query.trim())
+  }
+
+  const filteredProducts = searchQuery
+    ? products.filter((p) => {
+        const q = searchQuery.toLowerCase()
+        return (
+          p.name?.toLowerCase().includes(q) ||
+          p.brand?.toLowerCase().includes(q) ||
+          p.description?.toLowerCase().includes(q)
+        )
+      })
+    : products
+
   return (
-    <main className="max-w-wide mx-auto px-8 py-12">
+    <main className="max-w-wide mx-auto px-25 py-12">
+      {searchMode && (
+        <div className="mb-8">
+          <SearchBar
+            value={query}
+            onChange={setQuery}
+            onSubmit={handleSearch}
+            placeholder='Try "soap", "fragrance free", or "Branch Basics"'
+          />
+          {searchQuery && (
+            <p className="text-small font-medium text-neutral-500 leading-small mt-4">
+              {filteredProducts.length} result{filteredProducts.length !== 1 ? 's' : ''} for &ldquo;{searchQuery}&rdquo;
+            </p>
+          )}
+        </div>
+      )}
+
       <div className="flex flex-col gap-2 mb-10">
         <h1 className="text-h1 font-regular text-neutral-800 leading-heading tracking-heading">
           Browse Products
@@ -56,7 +97,7 @@ export default function BrowsePage() {
 
       {!loading && !error && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
               name={product.name}

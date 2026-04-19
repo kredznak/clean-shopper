@@ -28,7 +28,7 @@ export default {
         },
         surface: {
           page: '#F7F5F2',
-          card: '#FFFFFF',
+          card: '#EFECE7',
           secondary: '#EDE3CB',
           overlay: 'rgba(30, 27, 23, 0.4)',
         },
@@ -76,6 +76,7 @@ export default {
         10: '40px',
         12: '48px',
         16: '64px',
+        25: '100px',
       },
       maxWidth: {
         content: '720px',

@@ -1,18 +1,17 @@
 import { useState } from 'react'
 
 const NAV_LINKS = [
-  { key: 'home', label: 'Home' },
-  { key: 'library', label: 'Library' },
+  { key: 'browse', label: 'Browse' },
+  { key: 'search', label: 'Search' },
   { key: 'cart', label: 'Cart' },
-  { key: 'preferences', label: 'Preferences' },
 ]
 
-export default function NavBar({ activeRoute, onSignOut }) {
+export default function NavBar({ activeRoute, onNavigate, onSignOut }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <header className="bg-surface-card border-b border-neutral-200 shadow-sm">
-      <nav className="max-w-wide mx-auto px-8 flex items-center justify-between h-16">
+      <nav className="max-w-wide mx-auto px-25 flex items-center justify-between h-16">
 
         {/* Wordmark */}
         <span className="text-h4 font-semibold text-primary leading-heading">
@@ -27,6 +26,7 @@ export default function NavBar({ activeRoute, onSignOut }) {
               <a
                 key={key}
                 href="#"
+                onClick={(e) => { e.preventDefault(); onNavigate?.(key) }}
                 className={`
                   text-small font-medium
                   transition-colors duration-fast ease-default
@@ -71,7 +71,7 @@ export default function NavBar({ activeRoute, onSignOut }) {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="sm:hidden bg-surface-card border-t border-neutral-100 px-8 py-4 flex flex-col gap-4">
+        <div className="sm:hidden bg-surface-card border-t border-neutral-100 px-25 py-4 flex flex-col gap-4">
           {NAV_LINKS.map(({ key, label }) => {
             const isActive = activeRoute === key
             return (
@@ -83,7 +83,7 @@ export default function NavBar({ activeRoute, onSignOut }) {
                   transition-colors duration-fast ease-default
                   ${isActive ? 'text-primary' : 'text-neutral-500 hover:text-neutral-800'}
                 `}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => { e.preventDefault(); onNavigate?.(key); setMenuOpen(false) }}
               >
                 {label}
               </a>
