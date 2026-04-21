@@ -3,6 +3,7 @@ import { supabase } from './lib/supabase'
 import NavBar from './components/NavBar'
 import BrowsePage from './features/browse/BrowsePage'
 import MyListPage from './features/my-list/MyListPage'
+import ProductDetailPage from './features/product-detail/ProductDetailPage'
 import FloatingChat from './features/chat/FloatingChat'
 import SignInPage from './features/auth/SignInPage'
 import SignUpPage from './features/auth/SignUpPage'
@@ -15,6 +16,7 @@ export default function App() {
   const [authView, setAuthView] = useState<AuthView>('signin')
   const [activeTab, setActiveTab] = useState('browse')
   const [savedProducts, setSavedProducts] = useState<Record<number, any>>({})
+  const [selectedProduct, setSelectedProduct] = useState<any>(null)
 
   function toggleSave(product: any) {
     setSavedProducts((prev) => {
@@ -58,23 +60,34 @@ export default function App() {
     <div className="min-h-screen bg-surface-page">
       <NavBar
         activeRoute={activeTab}
-        onNavigate={setActiveTab}
+        onNavigate={(tab: string) => { setSelectedProduct(null); setActiveTab(tab) }}
         onSignOut={() => supabase.auth.signOut()}
       />
 
-      {activeTab === 'my-list' && (
-        <MyListPage
-          savedProducts={savedProducts}
-          onToggleSave={toggleSave}
-          onNavigateToBrowse={() => setActiveTab('browse')}
+      {selectedProduct ? (
+        <ProductDetailPage
+          product={selectedProduct}
+          onBack={() => setSelectedProduct(null)}
         />
-      )}
-      {(activeTab === 'browse' || activeTab === 'search') && (
-        <BrowsePage
-          searchMode={activeTab === 'search'}
-          savedProducts={savedProducts}
-          onToggleSave={toggleSave}
-        />
+      ) : (
+        <>
+          {activeTab === 'my-list' && (
+            <MyListPage
+              savedProducts={savedProducts}
+              onToggleSave={toggleSave}
+              onNavigateToBrowse={() => setActiveTab('browse')}
+              onSelectProduct={setSelectedProduct}
+            />
+          )}
+          {(activeTab === 'browse' || activeTab === 'search') && (
+            <BrowsePage
+              searchMode={activeTab === 'search'}
+              savedProducts={savedProducts}
+              onToggleSave={toggleSave}
+              onSelectProduct={setSelectedProduct}
+            />
+          )}
+        </>
       )}
 
       <FloatingChat />

@@ -405,3 +405,38 @@ ChatBubble is display-only and has no interactive states.
 - **Do not** use ChatBubble for system notifications or toasts — use inline error text instead.
 - Content is rendered as plain text. SafetyBadge components may be composed alongside ChatBubble output when the AI response references a specific product.
 - Do not truncate content — chat messages should always be fully visible.
+
+---
+
+## IngredientTag
+
+**Purpose:** Displays a single ingredient with its safety score and a brief explanation. The primary content unit in the product detail ingredient analysis view.
+
+### Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `name` | `string` | Yes | Ingredient name |
+| `score` | `'clean' \| 'caution' \| 'avoid'` | Yes | Safety score, rendered via SafetyBadge |
+| `explanation` | `string` | No | One-sentence explanation of the score |
+
+### Visual Structure
+
+```
+div.flex.flex-col.gap-1.p-4.bg-surface-card.rounded-md.border.border-neutral-200
+  div.flex.items-center.justify-between.gap-4
+    span.text-small.font-medium.text-neutral-800.leading-small   ← ingredient name
+    <SafetyBadge score={score} />
+  p.text-caption.font-regular.text-neutral-500.leading-caption   ← explanation
+```
+
+### States
+
+IngredientTag is display-only and has no interactive states.
+
+### Usage Rules
+
+- **Use** only in the product detail ingredient analysis list.
+- **Do not use** for products — use `ProductCard` instead.
+- Always include `explanation` when available to give the score context.
+- List items in a `flex flex-col gap-3` container.

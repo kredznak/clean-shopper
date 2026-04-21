@@ -2,7 +2,7 @@ import ProductCard from '../../components/ProductCard'
 import Button from '../../components/Button'
 import EmptyState from '../../components/EmptyState'
 
-export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBrowse }) {
+export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBrowse, onSelectProduct }) {
   const products = Object.values(savedProducts)
 
   return (
@@ -32,12 +32,13 @@ export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBr
               category={product.category}
               description={product.description}
               imageUrl={product.image_url}
+              onClick={() => onSelectProduct && onSelectProduct(product)}
               action={
                 <Button
                   label="Remove from List"
                   variant="secondary"
                   size="sm"
-                  onClick={() => onToggleSave(product)}
+                  onClick={(e) => { e.stopPropagation(); onToggleSave(product) }}
                 />
               }
             />
