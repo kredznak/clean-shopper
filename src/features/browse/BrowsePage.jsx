@@ -7,7 +7,7 @@ import CategoryTag from '../../components/CategoryTag'
 
 const CATEGORIES = ['Personal Care', 'Home Cleaning', 'Baby Care', 'Kitchen']
 
-export default function BrowsePage({ searchMode = false, savedProducts = {}, onToggleSave }) {
+export default function BrowsePage({ searchMode = false, savedProducts = {}, onToggleSave, onSelectProduct }) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -121,12 +121,13 @@ export default function BrowsePage({ searchMode = false, savedProducts = {}, onT
               category={product.category}
               description={product.description}
               imageUrl={product.image_url}
+              onClick={() => onSelectProduct && onSelectProduct(product)}
               action={
                 <Button
                   label={savedProducts[product.id] ? 'Saved to List' : 'Save to List'}
                   variant={savedProducts[product.id] ? 'primary' : 'secondary'}
                   size="sm"
-                  onClick={() => onToggleSave(product)}
+                  onClick={(e) => { e.stopPropagation(); onToggleSave(product) }}
                 />
               }
             />

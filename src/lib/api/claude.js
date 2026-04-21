@@ -36,6 +36,37 @@ export async function fetchProducts() {
   return data
 }
 
+export async function analyzeIngredients(product) {
+  const prompt = `You are an ingredient safety expert. Analyze the ingredients in this product and return a JSON array.
+
+Product: ${product.name}
+Brand: ${product.brand || 'Unknown'}
+Category: ${product.category}
+Description: ${product.description}
+
+Return a JSON array of the key ingredients typically found in this type of product. For each ingredient include:
+- "name": the ingredient name
+- "score": exactly one of "clean", "caution", or "avoid"
+- "explanation": one concise sentence explaining why it received that score
+
+Score definitions:
+- clean: safe, non-toxic, well-studied with no known concerns
+- caution: may be concerning for sensitive individuals, limited data, or mildly irritating
+- avoid: linked to toxicity, hormone disruption, carcinogenicity, or other significant health concerns
+
+Return ONLY a valid JSON array, no markdown, no prose. Example format:
+[{"name":"Water","score":"clean","explanation":"Inert solvent with no safety concerns."}]`
+
+  const response = await client.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1024,
+    messages: [{ role: 'user', content: prompt }],
+  })
+
+  const text = response.content[0].text.trim()
+  return JSON.parse(text)
+}
+
 export async function sendChatMessage(conversationHistory, products) {
   const productContext = products
     .map(p => `- ${p.name} by ${p.brand || 'Unknown brand'} | Category: ${p.category} | Safety: ${p.safety_score} | ${p.description}`)
