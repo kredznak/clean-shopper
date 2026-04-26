@@ -20,7 +20,7 @@ export default function ProductDetailPage({ product, onBack }) {
   }, [product.id])
 
   return (
-    <main className="max-w-content mx-auto px-8 py-12">
+    <main className="px-25 py-12">
       {/* Back nav */}
       <button
         onClick={onBack}

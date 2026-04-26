@@ -4,6 +4,7 @@ import ProductCard from '../../components/ProductCard'
 import Button from '../../components/Button'
 import SearchBar from '../../components/SearchBar'
 import CategoryTag from '../../components/CategoryTag'
+import HeroSection from './HeroSection'
 
 const CATEGORIES = ['Personal Care', 'Home Cleaning', 'Baby Care', 'Kitchen']
 
@@ -57,7 +58,9 @@ export default function BrowsePage({ searchMode = false, savedProducts = {}, onT
   })
 
   return (
-    <main className="max-w-wide mx-auto px-25 py-12">
+    <>
+      {!searchMode && <HeroSection />}
+      <main className="px-25 py-12">
       {searchMode && (
         <div className="mb-8">
           <SearchBar
@@ -135,5 +138,6 @@ export default function BrowsePage({ searchMode = false, savedProducts = {}, onT
         </div>
       )}
     </main>
+    </>
   )
 }

@@ -6,7 +6,7 @@ export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBr
   const products = Object.values(savedProducts)
 
   return (
-    <main className="max-w-wide mx-auto px-25 py-12">
+    <main className="px-25 py-12">
       <div className="flex flex-col gap-2 mb-10">
         <h1 className="text-h1 font-regular text-neutral-800 leading-heading tracking-heading">
           My List

@@ -11,7 +11,7 @@ export default function NavBar({ activeRoute, onNavigate, onSignOut }) {
 
   return (
     <header className="bg-surface-card border-b border-neutral-200 shadow-sm">
-      <nav className="max-w-wide mx-auto px-25 flex items-center justify-between h-16">
+      <nav className="px-25 flex items-center justify-between h-16">
 
         {/* Wordmark */}
         <span className="text-h4 font-semibold text-primary leading-heading">
