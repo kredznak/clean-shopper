@@ -12,7 +12,7 @@ export default function HeroSection() {
         </div>
         <div className="flex-shrink-0 flex items-center justify-center">
           <img
-            src="/cs-illustration.png"
+            src="/cs-illustration2.svg"
             alt="Clean Shopper illustration"
             className="object-contain w-[600px] h-[353px]"
           />
