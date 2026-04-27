@@ -106,6 +106,12 @@
   --ease-out: cubic-bezier(0, 0, 0.58, 1);
 }
 
+@layer utilities {
+  .font-brygada {
+    font-family: 'Brygada 1918', Georgia, serif;
+  }
+}
+
 @layer base {
   html {
     font-family: var(--font-primary);

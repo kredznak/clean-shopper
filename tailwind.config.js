@@ -35,6 +35,7 @@ export default {
       },
       fontFamily: {
         primary: ['Poppins', 'system-ui', '-apple-system', 'sans-serif'],
+        brygada: ['Brygada 1918', 'Georgia', 'serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'Cascadia Code', 'monospace'],
       },
       fontSize: {

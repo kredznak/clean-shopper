@@ -3,7 +3,7 @@ export default function HeroSection() {
     <section className="bg-white w-full rounded-b-xl">
       <div className="px-25 py-16 flex flex-col md:flex-row items-center gap-12">
         <div className="flex-1 flex flex-col gap-6">
-          <h1 className="text-display font-light text-neutral-800 leading-display tracking-display">
+          <h1 className="text-display font-semibold font-brygada text-neutral-800 leading-display tracking-display">
             A healthy home can change your life.
           </h1>
           <p className="text-body font-regular text-neutral-500 leading-body max-w-content">
