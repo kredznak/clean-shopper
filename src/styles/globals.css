@@ -108,7 +108,7 @@
 
 @layer utilities {
   .font-brygada {
-    font-family: 'Brygada 1918', Georgia, serif;
+    font-family: 'Chakra Petch', sans-serif;
   }
 }
 
@@ -117,6 +117,11 @@
     font-family: var(--font-primary);
     background-color: var(--surface-page);
     color: var(--neutral-600);
+  }
+
+  h1 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 400;
   }
 
   *:focus-visible {
