@@ -1,11 +1,12 @@
 import ProductCard from '../../components/ProductCard'
+import Button from '../../components/Button'
 import EmptyState from '../../components/EmptyState'
 
 export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBrowse, onSelectProduct }) {
   const products = Object.values(savedProducts)
 
   return (
-    <main className="px-25 py-12">
+    <main className="max-w-wide mx-auto px-8 py-12">
       <div className="flex flex-col gap-2 mb-10">
         <h1 className="text-h1 font-regular text-neutral-800 leading-heading tracking-heading">
           My Favorites
@@ -33,7 +34,14 @@ export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBr
               imageUrl={product.image_url}
               isSaved={true}
               onToggleSave={() => onToggleSave(product)}
-              onClick={() => onSelectProduct && onSelectProduct(product)}
+              action={
+                <Button
+                  label="View more details"
+                  variant="primary"
+                  size="sm"
+                  onClick={() => onSelectProduct && onSelectProduct(product)}
+                />
+              }
             />
           ))}
         </div>

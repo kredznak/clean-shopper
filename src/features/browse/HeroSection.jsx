@@ -1,22 +1,50 @@
-export default function HeroSection() {
+import Button from '../../components/Button'
+
+export default function HeroSection({ onScrollToGrid }) {
   return (
-    <section className="bg-white w-full rounded-b-xl">
-      <div className="px-25 py-16 flex flex-col md:flex-row items-center gap-12">
+    <section className="relative overflow-hidden bg-surface-page">
+
+      {/* Grain texture */}
+      <div
+        className="absolute inset-0 bg-grain opacity-[0.07] pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-wide mx-auto px-8 py-16 flex flex-col md:flex-row items-center gap-12">
+
+        {/* Text block */}
         <div className="flex-1 flex flex-col gap-6">
-          <h1 className="text-display font-regular font-brygada text-neutral-800 leading-display tracking-display">
+          <p className="text-caption font-medium text-primary uppercase tracking-caps">
+            AI-Powered Ingredient Research
+          </p>
+
+          <h1 className="text-display font-brygada font-regular text-neutral-800 leading-display tracking-display">
             A healthy home can change your life.
           </h1>
-          <p className="text-body font-regular text-neutral-500 leading-body max-w-content">
-            Clean Shopper is an AI-powered agent that helps users discover home and pantry products that are clean, non-toxic, and environmentally friendly.
+
+          <p className="text-body font-regular text-neutral-600 leading-body max-w-[460px]">
+            Know exactly what's in every product you bring home. Search thousands of personal care and cleaning brands, get AI ingredient analysis, and shop with confidence.
           </p>
+
+          <div>
+            <Button
+              label="Browse Products"
+              variant="primary"
+              size="md"
+              onClick={onScrollToGrid}
+            />
+          </div>
         </div>
+
+        {/* Painting */}
         <div className="flex-shrink-0 flex items-center justify-center">
           <img
-            src="/cs-illustration7.svg"
-            alt="Clean Shopper illustration"
-            className="object-contain w-[600px] h-[353px]"
+            src="/cs-illustration3.png"
+            alt="Sunlit flowers on a wooden table"
+            className="w-[520px] max-w-full h-auto rounded-xl object-cover shadow-md"
           />
         </div>
+
       </div>
     </section>
   )

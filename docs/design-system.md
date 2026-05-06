@@ -67,7 +67,7 @@ The palette is drawn from nature — forest greens, warm stones, soft earth. Col
 | Surface | Hex | Usage |
 |---------|-----|-------|
 | Page background | #F7F5F2 (neutral-50) | Main canvas. Warm stone-white. |
-| Card / elevated | #FFFFFF | Product cards, chat bubbles (AI), comparison panels. Lifts above the page. |
+| Card / elevated | #EFECE7 (neutral-100) | Product cards, chat bubbles (AI), comparison panels. Warm stone — slightly deeper than the page background. |
 | Sidebar / secondary | #EDE3CB (warm sand) | Preferences panel, cart sidebar, secondary surfaces. Distinct from the stone-white page background — adds warmth. |
 | Overlay backdrop | rgba(30, 27, 23, 0.4) | Modal and drawer backdrops. Warm black at low opacity. |
 
@@ -256,7 +256,7 @@ Not included in V1. The warm, earthy light-mode palette is the primary experienc
 
   /* --- Colors: Surfaces --- */
   --surface-page: #F7F5F2;
-  --surface-card: #FFFFFF;
+  --surface-card: #EFECE7;
   --surface-secondary: #EDE3CB;
   --surface-overlay: rgba(30, 27, 23, 0.4);
 

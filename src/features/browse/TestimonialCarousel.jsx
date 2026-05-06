@@ -128,7 +128,7 @@ export default function TestimonialCarousel() {
       <div className="px-25 flex items-end justify-between mb-10">
         <div>
           <p className="text-caption font-medium text-primary uppercase tracking-caps mb-2">Community</p>
-          <h2 className="text-display font-light text-neutral-800 leading-display tracking-display">
+          <h2 className="text-h1 font-regular text-neutral-800 leading-heading tracking-heading">
             From people who care<br />about what's in their home.
           </h2>
         </div>

@@ -5,7 +5,7 @@ export default function ProductCard({ name, safetyScore, score, category, descri
     <article
       onClick={onClick}
       className={`
-        bg-white
+        bg-surface-card
         rounded-lg shadow-sm border border-neutral-200
         overflow-hidden
         flex flex-col
@@ -31,7 +31,7 @@ export default function ProductCard({ name, safetyScore, score, category, descri
           <button
             onClick={(e) => { e.stopPropagation(); onToggleSave() }}
             aria-label={isSaved ? 'Remove from favorites' : 'Save to favorites'}
-            className="absolute top-3 right-3 p-1.5 rounded-full bg-white/80 hover:bg-white transition-colors duration-fast ease-default"
+            className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center rounded-full bg-white/80 hover:bg-white transition-colors duration-fast ease-default"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={isSaved ? 'text-error' : 'text-neutral-400'} aria-hidden="true">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -42,16 +42,14 @@ export default function ProductCard({ name, safetyScore, score, category, descri
 
       {/* Card body */}
       <div className="p-6 flex flex-col gap-3 flex-1">
-        {/* Header row: name + safety badge */}
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="text-h3 font-semibold text-neutral-800 leading-subheading tracking-heading">
-            {name}
-          </h3>
-          <SafetyBadge score={safetyScore} />
-        </div>
+        {/* Product name */}
+        <h3 className="text-h3 font-semibold text-neutral-800 leading-subheading tracking-heading">
+          {name}
+        </h3>
 
-        {/* Category + numeric score row */}
-        <div className="flex items-center gap-2">
+        {/* Safety badge + category row */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <SafetyBadge score={safetyScore} />
           <span className="text-small font-medium text-neutral-500 bg-neutral-100 px-3 py-1 rounded-full leading-small">
             {category}
           </span>
@@ -64,7 +62,7 @@ export default function ProductCard({ name, safetyScore, score, category, descri
         </div>
 
         {/* Description */}
-        <p className="text-body font-regular text-neutral-600 leading-body mt-1">
+        <p className="text-body font-regular text-neutral-600 leading-body mt-1 line-clamp-2">
           {description}
         </p>
 

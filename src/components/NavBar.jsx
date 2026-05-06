@@ -11,10 +11,10 @@ export default function NavBar({ activeRoute, onNavigate, onSignOut }) {
 
   return (
     <header className="bg-surface-card border-b border-neutral-200 shadow-sm">
-      <nav className="px-25 flex items-center justify-between h-16">
+      <nav className="max-w-wide mx-auto px-8 flex items-center justify-between h-16">
 
         {/* Wordmark */}
-        <span className="text-h4 font-semibold text-primary leading-heading">
+        <span className="text-h3 font-semibold text-primary leading-heading">
           Clean Shopper
         </span>
 
@@ -40,13 +40,18 @@ export default function NavBar({ activeRoute, onNavigate, onSignOut }) {
               </a>
             )
           })}
+
+          {/* Separator + Sign out */}
           {onSignOut && (
-            <button
-              onClick={onSignOut}
-              className="text-small font-medium text-neutral-500 hover:text-neutral-800 transition-colors duration-fast ease-default"
-            >
-              Sign out
-            </button>
+            <>
+              <span className="w-px h-4 bg-neutral-300" aria-hidden="true" />
+              <button
+                onClick={onSignOut}
+                className="text-small font-regular text-neutral-400 hover:text-neutral-600 transition-colors duration-fast ease-default"
+              >
+                Sign out
+              </button>
+            </>
           )}
         </div>
 
@@ -71,7 +76,7 @@ export default function NavBar({ activeRoute, onNavigate, onSignOut }) {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="sm:hidden bg-surface-card border-t border-neutral-100 px-25 py-4 flex flex-col gap-4">
+        <div className="sm:hidden bg-surface-card border-t border-neutral-100 px-8 py-4 flex flex-col gap-4">
           {NAV_LINKS.map(({ key, label }) => {
             const isActive = activeRoute === key
             return (
@@ -92,7 +97,7 @@ export default function NavBar({ activeRoute, onNavigate, onSignOut }) {
           {onSignOut && (
             <button
               onClick={() => { setMenuOpen(false); onSignOut() }}
-              className="text-small font-medium text-neutral-500 hover:text-neutral-800 transition-colors duration-fast ease-default text-left"
+              className="text-small font-regular text-neutral-400 hover:text-neutral-600 transition-colors duration-fast ease-default text-left"
             >
               Sign out
             </button>
