@@ -1,6 +1,6 @@
 import SafetyBadge from './SafetyBadge'
 
-export default function ProductCard({ name, safetyScore, score, category, description, imageUrl, onClick, action }) {
+export default function ProductCard({ name, safetyScore, score, category, description, imageUrl, onClick, action, isSaved, onToggleSave }) {
   return (
     <article
       onClick={onClick}
@@ -18,8 +18,8 @@ export default function ProductCard({ name, safetyScore, score, category, descri
       role={onClick ? 'button' : undefined}
       onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
     >
-      {/* Product image */}
-      <div className="w-full h-48 bg-white shrink-0 pt-3">
+      {/* Product image with heart button */}
+      <div className="relative w-full h-48 bg-white shrink-0 pt-3">
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -27,6 +27,17 @@ export default function ProductCard({ name, safetyScore, score, category, descri
             className="w-full h-full object-contain block"
           />
         ) : null}
+        {onToggleSave && (
+          <button
+            onClick={(e) => { e.stopPropagation(); onToggleSave() }}
+            aria-label={isSaved ? 'Remove from favorites' : 'Save to favorites'}
+            className="absolute top-3 right-3 p-1.5 rounded-full bg-white/80 hover:bg-white transition-colors duration-fast ease-default"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={isSaved ? 'text-error' : 'text-neutral-400'} aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Card body */}

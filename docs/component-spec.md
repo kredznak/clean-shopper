@@ -440,3 +440,45 @@ IngredientTag is display-only and has no interactive states.
 - **Do not use** for products — use `ProductCard` instead.
 - Always include `explanation` when available to give the score context.
 - List items in a `flex flex-col gap-3` container.
+
+---
+
+## TestimonialCarousel
+
+**Purpose:** A horizontally scrollable community section displayed below the product grid on the Browse page. Shows a mix of quote, customer, and product highlight cards to build social proof. Screen-specific — lives in `src/features/browse/`.
+
+### Props
+
+No props — content is hardcoded in the component.
+
+### Slide Types
+
+| Type | Content |
+|------|---------|
+| `quote` | Large pull-quote, author name, location |
+| `customer` | Avatar (initials + colored circle), name, role, short quote |
+| `highlight` | Leaf icon, community label, product name, clean badge |
+
+### Visual Structure
+
+```
+section.bg-neutral-100.py-16.overflow-hidden
+  div.px-25                                  ← header row
+    h2.text-display.font-light               ← section heading
+    div.flex.gap-3                           ← arrow nav (hidden on mobile)
+      button × 2                             ← prev / next
+
+  div.flex.gap-6.overflow-x-auto.pl-25.snap-x.snap-mandatory.no-scrollbar
+    QuoteCard | CustomerCard | HighlightCard  ← min-w-72 w-72 h-80 snap-start
+    div.w-25.shrink-0                        ← right padding spacer
+```
+
+### States
+
+Arrow buttons: hover `bg-neutral-200`, focus ring. Cards are display-only.
+
+### Usage Rules
+
+- **Use** only on the Browse page, below the product grid, in non-search mode.
+- Card order should alternate types for visual rhythm (quote → customer → highlight).
+- Do not nest interactive elements inside cards.

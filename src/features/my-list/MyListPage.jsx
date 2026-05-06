@@ -1,5 +1,4 @@
 import ProductCard from '../../components/ProductCard'
-import Button from '../../components/Button'
 import EmptyState from '../../components/EmptyState'
 
 export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBrowse, onSelectProduct }) {
@@ -9,17 +8,17 @@ export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBr
     <main className="px-25 py-12">
       <div className="flex flex-col gap-2 mb-10">
         <h1 className="text-h1 font-regular text-neutral-800 leading-heading tracking-heading">
-          My List
+          My Favorites
         </h1>
         <p className="text-body font-regular text-neutral-500 leading-body">
-          Products you've saved for research. Remove any item by clicking the button on its card.
+          Products you've saved. Tap the heart on any card to remove it.
         </p>
       </div>
 
       {products.length === 0 ? (
         <EmptyState
-          heading="Your list is empty"
-          body="Save products from Browse to start building your list."
+          heading="No favorites yet"
+          body="Tap the heart on any product to save it here."
           action={{ label: 'Browse Products', onClick: onNavigateToBrowse }}
         />
       ) : (
@@ -32,15 +31,9 @@ export default function MyListPage({ savedProducts, onToggleSave, onNavigateToBr
               category={product.category}
               description={product.description}
               imageUrl={product.image_url}
+              isSaved={true}
+              onToggleSave={() => onToggleSave(product)}
               onClick={() => onSelectProduct && onSelectProduct(product)}
-              action={
-                <Button
-                  label="Remove from List"
-                  variant="secondary"
-                  size="sm"
-                  onClick={(e) => { e.stopPropagation(); onToggleSave(product) }}
-                />
-              }
             />
           ))}
         </div>

@@ -5,6 +5,7 @@ import Button from '../../components/Button'
 import SearchBar from '../../components/SearchBar'
 import CategoryTag from '../../components/CategoryTag'
 import HeroSection from './HeroSection'
+import TestimonialCarousel from './TestimonialCarousel'
 
 const CATEGORIES = ['Personal Care', 'Home Cleaning', 'Baby Care', 'Kitchen']
 
@@ -15,6 +16,9 @@ export default function BrowsePage({ searchMode = false, savedProducts = {}, onT
   const [query, setQuery] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState(null)
+  const [showAll, setShowAll] = useState(false)
+
+  const INITIAL_LIMIT = 6
 
   useEffect(() => {
     async function fetchProducts() {
@@ -40,6 +44,10 @@ export default function BrowsePage({ searchMode = false, savedProducts = {}, onT
       setSearchQuery('')
     }
   }, [searchMode])
+
+  useEffect(() => {
+    setShowAll(false)
+  }, [activeCategory, searchQuery])
 
   function handleSearch() {
     setSearchQuery(query.trim())
@@ -115,29 +123,43 @@ export default function BrowsePage({ searchMode = false, savedProducts = {}, onT
       )}
 
       {!loading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              safetyScore={product.safety_score}
-              category={product.category}
-              description={product.description}
-              imageUrl={product.image_url}
-              onClick={() => onSelectProduct && onSelectProduct(product)}
-              action={
-                <Button
-                  label={savedProducts[product.id] ? 'Saved to List' : 'Save to List'}
-                  variant={savedProducts[product.id] ? 'primary' : 'secondary'}
-                  size="sm"
-                  onClick={(e) => { e.stopPropagation(); onToggleSave(product) }}
-                />
-              }
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(showAll ? filteredProducts : filteredProducts.slice(0, INITIAL_LIMIT)).map((product) => (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                safetyScore={product.safety_score}
+                category={product.category}
+                description={product.description}
+                imageUrl={product.image_url}
+                isSaved={!!savedProducts[product.id]}
+                onToggleSave={() => onToggleSave(product)}
+                action={
+                  <Button
+                    label="View more details"
+                    variant="primary"
+                    size="sm"
+                    onClick={() => onSelectProduct && onSelectProduct(product)}
+                  />
+                }
+              />
+            ))}
+          </div>
+          {filteredProducts.length > INITIAL_LIMIT && (
+            <div className="flex justify-center mt-10">
+              <Button
+                label={showAll ? 'See less' : 'See more'}
+                variant="secondary"
+                size="md"
+                onClick={() => setShowAll((prev) => !prev)}
+              />
+            </div>
+          )}
+        </>
       )}
     </main>
+    {!searchMode && <TestimonialCarousel />}
     </>
   )
 }
