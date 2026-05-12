@@ -19,7 +19,7 @@ export default function ProductCard({ name, safetyScore, score, category, descri
       onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
     >
       {/* Product image with heart button */}
-      <div className="relative w-full h-48 bg-white shrink-0 pt-3">
+      <div className="relative w-full h-48 bg-white shrink-0 py-3">
         {imageUrl ? (
           <img
             src={imageUrl}
