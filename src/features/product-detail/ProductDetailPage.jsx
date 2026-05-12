@@ -5,7 +5,7 @@ import SafetyBadge from '../../components/SafetyBadge'
 import Button from '../../components/Button'
 import CategoryTag from '../../components/CategoryTag'
 
-export default function ProductDetailPage({ product, onBack }) {
+export default function ProductDetailPage({ product, onBack, isSaved = false, onToggleSave }) {
   const [ingredients, setIngredients] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -20,7 +20,7 @@ export default function ProductDetailPage({ product, onBack }) {
   }, [product.id])
 
   return (
-    <main className="px-25 py-12">
+    <main className="max-w-wide mx-auto px-8 py-12">
       {/* Back nav */}
       <button
         onClick={onBack}
@@ -30,9 +30,9 @@ export default function ProductDetailPage({ product, onBack }) {
       </button>
 
       {/* Product header */}
-      <div className="flex flex-col gap-6 mb-10">
+      <div className="flex flex-col md:grid md:grid-cols-[240px_1fr] md:gap-10 gap-6 mb-10">
         {product.image_url && (
-          <div className="w-full max-w-xs h-48 bg-white rounded-lg border border-neutral-200 flex items-center justify-center p-4">
+          <div className="w-60 h-60 bg-surface-card rounded-lg border border-neutral-200 flex items-center justify-center p-4 shrink-0">
             <img
               src={product.image_url}
               alt={product.name}
@@ -58,11 +58,20 @@ export default function ProductDetailPage({ product, onBack }) {
           <p className="text-body font-regular text-neutral-600 leading-body max-w-content">
             {product.description}
           </p>
+
+          <div className="self-start">
+            <Button
+              label={isSaved ? 'Saved' : 'Save'}
+              variant={isSaved ? 'secondary' : 'primary'}
+              size="sm"
+              onClick={onToggleSave}
+            />
+          </div>
         </div>
       </div>
 
       {/* Ingredient analysis */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 border-t border-neutral-200 pt-10 mt-10">
         <div className="flex flex-col gap-1">
           <h2 className="text-h2 font-semibold text-neutral-800">Ingredient Analysis</h2>
           <p className="text-small font-regular text-neutral-500 leading-small">

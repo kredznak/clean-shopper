@@ -68,6 +68,8 @@ export default function App() {
         <ProductDetailPage
           product={selectedProduct}
           onBack={() => setSelectedProduct(null)}
+          isSaved={!!savedProducts[selectedProduct.id]}
+          onToggleSave={() => toggleSave(selectedProduct)}
         />
       ) : (
         <>
